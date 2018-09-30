@@ -13,7 +13,9 @@ import {
 
 
 const _toggleTodo = action('TODO::TOGGLE');
+const _deleteTodo = action('TODO::DELETE');
 export const toggleTodo = id => _toggleTodo({ id });
+export const deleteTodo = id => _deleteTodo({ id });
 export const saveTodo = action('TODO::SAVE');
 export const setFilter = action('TODO::SET-FILTER');
 // toggleTodo(id)
@@ -22,11 +24,15 @@ const initialTodoState = {
   id: null,
   name: '',
   completed: false,
-}
+  deleted: false,
+};
 
 const todo = createReducer(initialTodoState, {
   [_toggleTodo.type]: state => ({
     ...state, completed: !state.completed,
+  }),
+  [_deleteTodo.type]: state => ({
+    ...state, deleted: !state.deleted,
   }),
   [saveTodo.type]: mergePayload,
 });
@@ -35,6 +41,7 @@ const todoLookup = lookupReducer(todo);
 
 const byId = createReducer({}, {
   [_toggleTodo.type]: todoLookup,
+  [_deleteTodo.type]: todoLookup,
   [saveTodo.type]: todoLookup,
 });
 

@@ -3,5 +3,8 @@ import { compose } from './redux-utils';
 import todos from './todos';
 
 export const initTodos = ({ dispatch }) => todos.map(
-  compose(dispatch, saveTodo)
+  item=> {
+    item.id = new Date * Math.random();
+    return compose(dispatch, saveTodo)(item);
+  }
 );

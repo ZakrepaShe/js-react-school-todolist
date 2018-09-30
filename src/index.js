@@ -29,7 +29,7 @@ ReactDOM.render(
   rootElement
 );
 
-setInterval(
-  compose(store.dispatch, interval),
-  1000
-)
+// setInterval(
+//   compose(store.dispatch, interval),
+//   1000
+// )
